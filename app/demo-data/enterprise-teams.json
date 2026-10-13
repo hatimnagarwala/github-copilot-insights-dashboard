@@ -1,0 +1,92 @@
+[
+  {
+    "githubTeamId": 999201,
+    "name": "Demo Web Experience",
+    "slug": "demo-web-experience",
+    "description": "Synthetic web experience team for demo analytics.",
+    "members": [
+      90000001,
+      90000003,
+      90000005,
+      90000007,
+      90000009,
+      90000011,
+      90000013,
+      90000015,
+      90000017,
+      90000019,
+      90000021,
+      90000023,
+      90000025
+    ]
+  },
+  {
+    "githubTeamId": 999202,
+    "name": "Demo Design Systems",
+    "slug": "demo-design-systems",
+    "description": "Synthetic design systems team for demo analytics.",
+    "members": [
+      90000002,
+      90000004,
+      90000006,
+      90000008,
+      90000010,
+      90000012,
+      90000014,
+      90000016,
+      90000018,
+      90000020,
+      90000022,
+      90000024
+    ]
+  },
+  {
+    "githubTeamId": 999203,
+    "name": "Demo Platform Engineering",
+    "slug": "demo-platform-engineering",
+    "description": "Synthetic platform engineering team for demo analytics.",
+    "members": [
+      90000027,
+      90000029,
+      90000031,
+      90000033,
+      90000035,
+      90000037,
+      90000039
+    ]
+  },
+  {
+    "githubTeamId": 999204,
+    "name": "Demo Developer Productivity",
+    "slug": "demo-developer-productivity",
+    "description": "Synthetic developer productivity team for demo analytics.",
+    "members": [
+      90000026,
+      90000028,
+      90000030,
+      90000032,
+      90000034,
+      90000036,
+      90000038,
+      90000040
+    ]
+  },
+  {
+    "githubTeamId": 999205,
+    "name": "Demo Data Intelligence",
+    "slug": "demo-data-intelligence",
+    "description": "Synthetic data intelligence team for demo analytics.",
+    "members": [
+      90000041,
+      90000042,
+      90000043,
+      90000044,
+      90000045,
+      90000046,
+      90000047,
+      90000048,
+      90000049,
+      90000050
+    ]
+  }
+]

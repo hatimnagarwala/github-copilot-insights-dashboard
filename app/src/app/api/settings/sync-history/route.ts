@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { ingestionLog } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 import { safeErrorMessage } from "@/lib/auth";

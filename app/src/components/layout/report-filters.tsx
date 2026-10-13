@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useTranslation } from "@/lib/i18n/locale-provider";
+import { FlaskConical } from "lucide-react";
+import { useDataMode } from "@/lib/demo/use-data-mode";
 
 /* ── Types ── */
 
@@ -453,6 +455,7 @@ export function ReportFilters({
  */
 export function DataSourceBanner({ sourceLabel, live }: { sourceLabel?: string; live?: boolean } = {}) {
   const { t } = useTranslation();
+  const { mode } = useDataMode();
   const [range, setRange] = useState<DataRange | null>(null);
 
   useEffect(() => {
@@ -471,6 +474,12 @@ export function DataSourceBanner({ sourceLabel, live }: { sourceLabel?: string; 
       <span>
         <span className="font-medium text-gray-600 dark:text-gray-300">{t("dataSource.label")}</span> {sourceLabel ?? t("dataSource.defaultSource")}
       </span>
+      {mode === "demo" && (
+        <span className="inline-flex items-center gap-1 rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 font-medium text-amber-900 dark:border-amber-700/60 dark:bg-amber-900/40 dark:text-amber-200">
+          <FlaskConical className="h-3 w-3" aria-hidden="true" />
+          {t("demoMode.badge")}
+        </span>
+      )}
       {!live && range && range.dataStart && (
         <span>
           <span className="font-medium text-gray-600 dark:text-gray-300">{t("dataSource.range")}</span>{" "}

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { sql, desc } from "drizzle-orm";
-import { ingestionLog } from "@/lib/db/schema";
+import { factCopilotUsageDaily, ingestionLog } from "@/lib/db/schema";
 import { safeErrorMessage } from "@/lib/auth";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoMeta } from "@/lib/demo/schema";
 
 export const dynamic = "force-dynamic";
 
@@ -23,11 +25,31 @@ export async function GET() {
     await db.execute(sql`SELECT 1`);
     const latencyMs = Date.now() - start;
 
-    // Surface the most recent ingestion so operators / uptime checks can detect
-    // a database that is reachable but no longer being refreshed.
+    // Demo data has its own load timestamp; live ingestion history remains isolated.
+    const demoMode = await isDemoMode();
     let lastSync: LastSync | null = null;
+    if (demoMode) {
+      const [meta, data] = await Promise.all([
+        getDemoMeta(),
+        db.select({ maxDate: sql<string>`MAX(${factCopilotUsageDaily.day})`, rows: sql<number>`COUNT(*)` })
+          .from(factCopilotUsageDaily),
+      ]);
+      const loadedAt = meta.loadedAt ?? (Number(data[0]?.rows) > 0 && data[0]?.maxDate
+        ? new Date(`${data[0].maxDate}T00:00:00.000Z`).toISOString()
+        : null);
+      if (loadedAt) {
+        const ageMs = Date.now() - new Date(loadedAt).getTime();
+        lastSync = {
+          status: "success",
+          startedAt: loadedAt,
+          completedAt: loadedAt,
+          ageMs,
+          stale: ageMs > FRESHNESS_THRESHOLD_MS,
+        };
+      }
+    }
     try {
-      const [row] = await db
+      const [row] = demoMode ? [] : await db
         .select({
           status: ingestionLog.status,
           startedAt: ingestionLog.startedAt,
@@ -37,7 +59,7 @@ export async function GET() {
         .orderBy(desc(ingestionLog.startedAt))
         .limit(1);
 
-      if (row) {
+      if (!demoMode && row) {
         const reference = row.completedAt ?? row.startedAt;
         const ageMs = reference ? Date.now() - new Date(reference).getTime() : null;
         lastSync = {

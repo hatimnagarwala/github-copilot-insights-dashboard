@@ -3,7 +3,7 @@ import { describe, it, expect, afterAll } from "vitest";
 import { and, eq, isNull, sql } from "drizzle-orm";
 import { parseNdjson, flattenAggregateReport } from "@/lib/github/copilot-api";
 import { persistOrgAggregates } from "@/lib/etl/ingest";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import {
   factOrgAggregateDaily,
   factOrgAdoptionPhaseDaily,
@@ -57,7 +57,7 @@ describe.skipIf(!process.env.DATABASE_URL)("persistOrgAggregates (integration)",
     expect(first.phase).toBe(3); // 06-02: phases 0 & 3 + 06-04: 1 phase
     expect(first.cmt).toBe(4); // 06-02: 2 + 06-04: 2 comment types
 
-    // Re-ingest → delete-then-insert keeps counts identical (no duplicates).
+    // Re-ingest â†’ delete-then-insert keeps counts identical (no duplicates).
     await persistOrgAggregates(fixtureRecords(), new Map());
     expect(await counts()).toEqual(first);
 

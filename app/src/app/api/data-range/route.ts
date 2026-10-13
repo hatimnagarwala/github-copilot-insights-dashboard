@@ -3,12 +3,15 @@ import { db } from "@/lib/db";
 import { factCopilotUsageDaily, ingestionLog } from "@/lib/db/schema";
 import { sql, eq, desc } from "drizzle-orm";
 import { safeErrorMessage } from "@/lib/auth";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoMeta } from "@/lib/demo/schema";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const [dateRange, lastSync] = await Promise.all([
+    const demoMode = await isDemoMode();
+    const [dateRange, lastSync, demoMeta] = await Promise.all([
       db
         .select({
           minDate: sql<string>`MIN(${factCopilotUsageDaily.day})`,
@@ -16,17 +19,19 @@ export async function GET() {
           totalRows: sql<number>`COUNT(*)`,
         })
         .from(factCopilotUsageDaily),
-
-      db
-        .select({
-          completedAt: ingestionLog.completedAt,
-          status: ingestionLog.status,
-          source: ingestionLog.source,
-        })
-        .from(ingestionLog)
-        .where(eq(ingestionLog.status, "success"))
-        .orderBy(desc(ingestionLog.completedAt))
-        .limit(1),
+      demoMode
+        ? Promise.resolve([])
+        : db
+            .select({
+              completedAt: ingestionLog.completedAt,
+              status: ingestionLog.status,
+              source: ingestionLog.source,
+            })
+            .from(ingestionLog)
+            .where(eq(ingestionLog.status, "success"))
+            .orderBy(desc(ingestionLog.completedAt))
+            .limit(1),
+      demoMode ? getDemoMeta() : Promise.resolve(null),
     ]);
 
     const range = dateRange[0];
@@ -36,8 +41,8 @@ export async function GET() {
       dataStart: range?.minDate ?? null,
       dataEnd: range?.maxDate ?? null,
       totalRows: Number(range?.totalRows ?? 0),
-      lastSyncAt: sync?.completedAt ?? null,
-      lastSyncSource: sync?.source ?? null,
+      lastSyncAt: demoMode ? demoMeta?.loadedAt ?? range?.maxDate ?? null : sync?.completedAt ?? null,
+      lastSyncSource: demoMode ? "demo" : sync?.source ?? null,
     });
   } catch (err) {
     console.error("Data range API error:", err);

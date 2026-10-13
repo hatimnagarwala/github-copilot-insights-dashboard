@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { auditLog } from "@/lib/db/schema";
 import { desc, eq, and, gte, lte, sql } from "drizzle-orm";
 import { isValidDate } from "@/lib/utils";

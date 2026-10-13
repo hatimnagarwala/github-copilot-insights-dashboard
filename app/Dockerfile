@@ -53,6 +53,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/drizzle ./drizzle
+COPY --from=builder --chown=nextjs:nodejs /app/demo-data ./demo-data
 COPY --from=copilot-cli --chown=nextjs:nodejs /cli/node_modules ./copilot-cli/node_modules
 RUN test -f "$COPILOT_CLI_PATH"
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Sidebar } from "@/components/layout/sidebar";
+import { DemoModeBanner } from "@/components/layout/demo-mode-banner";
 import { AuthGate } from "@/components/auth/auth-gate";
 import { ThemeProvider } from "@/lib/theme/theme-provider";
 import { LocaleProvider } from "@/lib/i18n/locale-provider";
@@ -73,6 +74,7 @@ export default function RootLayout({
               <div className="flex h-screen">
                 <Sidebar />
                 <main className="flex flex-1 flex-col overflow-hidden">
+                  <DemoModeBanner />
                   <div className="flex-1 overflow-y-auto p-6">{children}</div>
                 </main>
               </div>

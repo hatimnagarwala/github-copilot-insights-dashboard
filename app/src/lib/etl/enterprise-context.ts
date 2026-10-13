@@ -1,5 +1,6 @@
 import { and, eq } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { liveDb as db, liveDb } from "@/lib/db";
+import type { EtlDatabase } from "./ingest";
 import {
   dimOrg,
   dimOrgMember,
@@ -37,7 +38,9 @@ function toDateOnly(value: string | null | undefined): string | null {
 async function insertBatches<T extends Record<string, unknown>>(
   table: Parameters<typeof db.insert>[0],
   rows: T[],
+  database: EtlDatabase = liveDb,
 ): Promise<void> {
+  const db = database;
   for (let i = 0; i < rows.length; i += INSERT_BATCH_SIZE) {
     await db.insert(table).values(rows.slice(i, i + INSERT_BATCH_SIZE));
   }
@@ -73,7 +76,8 @@ export async function persistCopilotSeatAssignments(opts: {
   enterpriseSlug: string;
   seats: CopilotSeat[];
   snapshotDate?: string;
-}): Promise<{ assignmentsSynced: number; snapshotDate: string }> {
+}, database: EtlDatabase = liveDb): Promise<{ assignmentsSynced: number; snapshotDate: string }> {
+  const db = database;
   const snapshotDate = opts.snapshotDate ?? todayIso();
 
   await db
@@ -107,7 +111,7 @@ export async function persistCopilotSeatAssignments(opts: {
     capturedAt: new Date(),
   }));
 
-  if (rows.length > 0) await insertBatches(factCopilotSeatAssignment, rows);
+  if (rows.length > 0) await insertBatches(factCopilotSeatAssignment, rows, database);
 
   return { assignmentsSynced: rows.length, snapshotDate };
 }

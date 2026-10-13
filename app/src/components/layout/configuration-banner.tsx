@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AlertTriangle } from "lucide-react";
 import { useTranslation } from "@/lib/i18n/locale-provider";
+import { useDataMode } from "@/lib/demo/use-data-mode";
 
 interface ConfigStatus {
   tokenConfigured: boolean;
@@ -12,6 +13,7 @@ interface ConfigStatus {
 
 export function ConfigurationBanner() {
   const { t } = useTranslation();
+  const { mode } = useDataMode();
   const [status, setStatus] = useState<ConfigStatus | null>(null);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export function ConfigurationBanner() {
     };
   }, []);
 
-  if (!status || (status.tokenConfigured && status.slugConfigured)) {
+  if (mode !== "live" || !status || (status.tokenConfigured && status.slugConfigured)) {
     return null;
   }
 

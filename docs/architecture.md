@@ -75,6 +75,9 @@ All API routes live under `app/src/app/api/` and use Zod for request validation.
 | `/api/ingest/stream` | GET | SSE streaming ingest with progress |
 | `/api/ingest/upload` | POST | Upload JSON/NDJSON data manually |
 | `/api/settings` | GET/PUT/DELETE | Application settings CRUD |
+| `/api/data-mode` | GET | Active data mode and demo dataset summary |
+| `/api/settings/data-mode` | POST | Admin-only switch between live and demo data (`mode`) |
+| `/api/settings/demo-data/reload` | POST | Admin-only demo fixture reload with SSE progress |
 | `/api/settings/orgs` | GET | Discover GitHub organizations |
 | `/api/settings/sync-history` | GET | Sync history log |
 | `/api/settings/sync-interval` | GET/POST | Background sync interval config |
@@ -285,9 +288,17 @@ graph LR
     C --> D["Response formatted<br/>and returned to client"]
 ```
 
-Seats, Premium Requests, and Enterprise Teams pages call GitHub APIs directly on each request (no database caching) to ensure real-time data. These pages display a "Live from GitHub API" data source banner.
+In live mode, Seats, Premium Requests, and Enterprise Teams pages call GitHub APIs directly on each request (no database caching) to ensure real-time data. These pages display a "Live from GitHub API" data source banner.
 
-AI Credits uses a hybrid approach: selected-month usage is fetched from GitHub's `/settings/billing/ai_credit/usage` endpoint, then persisted to `fact_ai_credit_usage` so monthly trends remain available across endpoint-era transitions.
+In live mode, AI Credits uses a hybrid approach: selected-month usage is fetched from GitHub's `/settings/billing/ai_credit/usage` endpoint, then persisted to `fact_ai_credit_usage` so monthly trends remain available across endpoint-era transitions.
+
+## Demo Data Mode
+
+Demo Data Mode provides an admin-only, global switch between `live` and `demo`, persisted in `app_settings` under `data_mode`. The mode is cached in-process and refreshed every 30 seconds. `lib/db/index.ts` exports `db`, a proxy that routes report queries according to the cached mode, plus explicit `liveDb` and `demoDb` clients; `demoDb` uses the PostgreSQL `demo,public` search path. ETL, settings, and audit operations are pinned to `liveDb`, so changing the report mode does not redirect synchronization or administrative writes.
+
+`lib/demo/schema.ts` creates a separate `demo` schema by cloning 25 data tables with `LIKE ... INCLUDING ALL`. It checks the cloned columns against `public` for schema drift and recreates mismatched demo tables without modifying live data. Deterministic fixtures in `app/demo-data/` are generated with `pnpm run demo:generate` by `scripts/generate-demo-data.ts` and `lib/demo/generate.ts` (50 synthetic users, 180 days, fixed seed `20261012`). `lib/demo/loader.ts` shifts fixture dates to the current day and loads the demo schema after successful startup migrations; administrators can reload the fixtures from Settings, where progress is streamed as server-sent events.
+
+In demo mode, the seats, AI credits, and premium requests routes, as well as display-name resolution, use the demo fixtures or demo tables instead of live GitHub data. The sidebar shows a Live/Demo pill, report pages display a demo banner, and Settings includes a Demo Data tab. The mode and reload controls are exposed by `GET /api/data-mode`, `POST /api/settings/data-mode`, and `POST /api/settings/demo-data/reload`.
 
 ## Configuration
 
@@ -300,8 +311,9 @@ Application settings are stored in the `app_settings` database table and managed
 | Sync Scope | Enterprise-wide or org-specific data ingestion |
 | Sync Org Logins | Comma-separated org logins (when scope is org-specific) |
 
-The Settings page has four tabs:
+The Settings page has five sections:
 1. **Configuration** — Token, enterprise slug, API reference table
 2. **Data Sync** — Manual sync trigger, file upload, sync history, schedule config, database management
-3. **Audit Log** — Admin action history with search, filter, and export
-4. **App Info** — Database status, API version, build info, and required scopes
+3. **Demo Data** — Active data mode, fixture summary, and admin-triggered reload
+4. **Audit Log** — Admin action history with search, filter, and export
+5. **App Info** — Database status, API version, build info, and required scopes

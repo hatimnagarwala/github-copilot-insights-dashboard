@@ -8,7 +8,7 @@
  * the unified sync history.
  */
 
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import {
   dimEnterpriseTeam,
   dimEnterpriseTeamMember,

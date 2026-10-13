@@ -26,7 +26,7 @@ async function runIngestion() {
     const { ingestCopilotUsage } = await import("@/lib/etl/ingest");
     const { syncEnterpriseTeams } = await import("@/lib/etl/enterprise-teams");
     const { syncEnterpriseContext } = await import("@/lib/etl/enterprise-context");
-    const { db } = await import("@/lib/db");
+    const { liveDb: db } = await import("@/lib/db");
     const { ingestionLog } = await import("@/lib/db/schema");
     const { token, enterpriseSlug } = await getGitHubConfig();
     const { scopes: configuredScopes, orgLogins } = await getSyncScopeConfig();

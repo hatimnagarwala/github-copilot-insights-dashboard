@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { and, eq } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { ingestCopilotUsage } from "@/lib/etl/ingest";
 import { dimOrg, factOrgAdoptionPhaseDaily, factOrgAggregateDaily, factOrgPrCommentTypeDaily } from "@/lib/db/schema";
 

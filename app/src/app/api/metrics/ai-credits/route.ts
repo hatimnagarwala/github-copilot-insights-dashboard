@@ -9,8 +9,14 @@ import {
   getAiCreditMonthlyTotalsFromDb,
   monthKey,
   type NormalizedAiCreditItem,
+  type AiCreditMonthlyTotal,
 } from "@/lib/db/ai-credit-usage";
 import { getCreditConsumption } from "@/lib/db/ai-credit-consumption";
+import { db } from "@/lib/db";
+import { dimEnterpriseTeam, dimOrg, dimUser, factAiCreditUsage } from "@/lib/db/schema";
+import { and, desc, eq, inArray } from "drizzle-orm";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoManifest, getDemoSeats } from "@/lib/demo/fixtures";
 
 export const dynamic = "force-dynamic";
 
@@ -248,6 +254,59 @@ function round2(v: number): number {
   return Math.round(v * 100) / 100;
 }
 
+async function fetchDemoUsageItems(year: number, month: number): Promise<NormalizedAiCreditItem[]> {
+  const rows = await db.select().from(factAiCreditUsage).where(and(
+    eq(factAiCreditUsage.periodYear, year),
+    eq(factAiCreditUsage.periodMonth, month),
+  ));
+  return rows.map((row) => ({
+    usageDate: row.usageDate,
+    product: row.product,
+    sku: row.sku,
+    model: row.model,
+    costCenter: row.costCenter,
+    orgName: row.orgName,
+    userLogin: row.userLogin,
+    teamName: row.teamName,
+    unitType: row.unitType,
+    pricePerUnit: Number(row.pricePerUnit),
+    grossQuantity: Number(row.grossQuantity),
+    discountQuantity: Number(row.discountQuantity),
+    netQuantity: Number(row.netQuantity),
+    grossAmount: Number(row.grossAmount),
+    discountAmount: Number(row.discountAmount),
+    netAmount: Number(row.netAmount),
+  }));
+}
+
+async function getDemoDimensionFilters(parsed: z.infer<typeof querySchema>) {
+  const ids = (value?: string) => (value ?? "").split(",").map((s) => s.trim()).filter(Boolean)
+    .map(Number).filter(Number.isInteger);
+  const userIds = ids(parsed.userId);
+  const orgIds = ids(parsed.orgId);
+  const teamIds = ids(parsed.teamId);
+  const [users, orgs, teams] = await Promise.all([
+    userIds.length ? db.select({ name: dimUser.userLogin }).from(dimUser).where(inArray(dimUser.userId, userIds)) : [],
+    orgIds.length ? db.select({ name: dimOrg.orgName }).from(dimOrg).where(inArray(dimOrg.orgId, orgIds)) : [],
+    teamIds.length ? db.select({ name: dimEnterpriseTeam.teamName }).from(dimEnterpriseTeam).where(inArray(dimEnterpriseTeam.teamId, teamIds)) : [],
+  ]);
+  return {
+    users: userIds.length ? new Set(users.map((row) => row.name.toLowerCase())) : null,
+    orgs: orgIds.length ? new Set(orgs.map((row) => row.name.toLowerCase())) : null,
+    teams: teamIds.length ? new Set(teams.map((row) => row.name.toLowerCase())) : null,
+  };
+}
+
+function matchesDemoDimensions(
+  item: NormalizedAiCreditItem,
+  filters: Awaited<ReturnType<typeof getDemoDimensionFilters>>,
+): boolean {
+  if (filters.users && !filters.users.has((item.userLogin ?? "").toLowerCase())) return false;
+  if (filters.orgs && !filters.orgs.has((item.orgName ?? "").toLowerCase())) return false;
+  if (filters.teams && !filters.teams.has((item.teamName ?? "").toLowerCase())) return false;
+  return true;
+}
+
 function roundBucketAmounts(bucket: CreditBucket): CreditBucket {
   return {
     grossQuantity: Math.round(bucket.grossQuantity * 100) / 100,
@@ -261,9 +320,12 @@ function roundBucketAmounts(bucket: CreditBucket): CreditBucket {
 
 export async function GET(request: NextRequest) {
   try {
-    const { token, enterpriseSlug } = await getGitHubConfig();
+    const demoMode = await isDemoMode();
+    const config = demoMode ? null : await getGitHubConfig();
+    const token = config?.token ?? null;
+    const enterpriseSlug = demoMode ? (await getDemoManifest()).enterprise.slug : config?.enterpriseSlug ?? null;
 
-    if (!token || !enterpriseSlug) {
+    if (!demoMode && (!token || !enterpriseSlug)) {
       return NextResponse.json(
         { error: "GitHub token and enterprise slug must be configured in Settings." },
         { status: 400 }
@@ -282,18 +344,28 @@ export async function GET(request: NextRequest) {
       teamId: sp.get("teamId") ?? undefined,
     });
 
-    const year = parsed.year ?? now.getFullYear();
-    const month = parsed.month ?? now.getMonth() + 1;
+    let year = parsed.year ?? now.getFullYear();
+    let month = parsed.month ?? now.getMonth() + 1;
+    if (demoMode && parsed.year === undefined && parsed.month === undefined) {
+      const latest = await db.select({ year: factAiCreditUsage.periodYear, month: factAiCreditUsage.periodMonth })
+        .from(factAiCreditUsage)
+        .orderBy(desc(factAiCreditUsage.periodYear), desc(factAiCreditUsage.periodMonth))
+        .limit(1);
+      if (latest[0]) ({ year, month } = latest[0]);
+    }
 
     const selectedFilters: MatchFilters = {
       model: parseCsvSet(parsed.model),
       costCenter: parseCsvSet(parsed.costCenter),
     };
+    const demoDimensionFilters = demoMode ? await getDemoDimensionFilters(parsed) : null;
 
     // 1. Fetch selected-month AI Credit usage.
     let usageItems: NormalizedAiCreditItem[] = [];
     try {
-      usageItems = await fetchUsageItems(token, enterpriseSlug, year, month);
+      usageItems = demoMode
+        ? await fetchDemoUsageItems(year, month)
+        : await fetchUsageItems(token!, enterpriseSlug!, year, month);
     } catch (err) {
       if (err instanceof GitHubHttpError) {
         console.error(`AI Credit billing API error: ${err.status}`, err.body);
@@ -318,28 +390,33 @@ export async function GET(request: NextRequest) {
     }
 
     // Persist this month's snapshot (best-effort) for trend continuity.
-    await persistAiCreditSnapshot(enterpriseSlug, year, month, usageItems);
+    if (!demoMode) await persistAiCreditSnapshot(enterpriseSlug!, year, month, usageItems);
 
     // 2. Fetch seat data for "credits per seat" context (deduped, highest plan wins).
-    const allSeats: SeatInfo[] = [];
-    let page = 1;
-    while (true) {
-      const seatsUrl = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug)}/copilot/billing/seats?per_page=100&page=${page}`;
-      const seatsRes = await fetch(seatsUrl, {
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: "Bearer " + token,
-          "X-GitHub-Api-Version": API_VERSION,
-        },
-        next: { revalidate: 0 },
-      });
+    let allSeats: SeatInfo[];
+    if (demoMode) {
+      allSeats = (await getDemoSeats()).map((seat) => ({ plan_type: seat.plan_type, assignee: seat.assignee }));
+    } else {
+      allSeats = [];
+      let page = 1;
+      while (true) {
+        const seatsUrl = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug!)}/copilot/billing/seats?per_page=100&page=${page}`;
+        const seatsRes = await fetch(seatsUrl, {
+          headers: {
+            Accept: "application/vnd.github+json",
+            Authorization: "Bearer " + token,
+            "X-GitHub-Api-Version": API_VERSION,
+          },
+          next: { revalidate: 0 },
+        });
 
-      if (!seatsRes.ok) break;
+        if (!seatsRes.ok) break;
 
-      const seatsData: SeatsResponse = await seatsRes.json();
-      allSeats.push(...seatsData.seats);
-      if (seatsData.seats.length < 100) break;
-      page++;
+        const seatsData: SeatsResponse = await seatsRes.json();
+        allSeats.push(...seatsData.seats);
+        if (seatsData.seats.length < 100) break;
+        page++;
+      }
     }
 
     const PLAN_TIER: Record<string, number> = { enterprise: 2, business: 1 };
@@ -366,7 +443,10 @@ export async function GET(request: NextRequest) {
       costCenters: Array.from(new Set(usageItems.map((i) => i.costCenter).filter((v): v is string => Boolean(v)))).sort((a, b) => a.localeCompare(b)),
     };
 
-    const filteredItems = usageItems.filter((item) => usageMatchesFilters(item, selectedFilters));
+    const filteredItems = usageItems.filter((item) =>
+      usageMatchesFilters(item, selectedFilters) &&
+      (!demoDimensionFilters || matchesDemoDimensions(item, demoDimensionFilters))
+    );
 
     // 4. Aggregate filtered usage.
     const totals = emptyBucket();
@@ -466,7 +546,9 @@ export async function GET(request: NextRequest) {
 
     // 6. Trailing 6-month trend — DB snapshots first, live API fallback per month.
     const monthPoints = Array.from({ length: 6 }, (_, idx) => shiftMonth(year, month, idx - 5));
-    const dbTotals = await getAiCreditMonthlyTotalsFromDb(enterpriseSlug, monthPoints);
+    const dbTotals: Map<string, AiCreditMonthlyTotal> = demoMode
+      ? new Map<string, AiCreditMonthlyTotal>()
+      : await getAiCreditMonthlyTotalsFromDb(enterpriseSlug!, monthPoints);
     const hasActiveFilters = Object.values(selectedFilters).some((f) => f !== null);
 
     const monthlyTrend = await Promise.all(
@@ -480,9 +562,18 @@ export async function GET(request: NextRequest) {
         } else if (!hasActiveFilters && dbTotals.has(key)) {
           // Snapshots store unfiltered totals; only use them when no filter is applied.
           bucket = dbTotals.get(key)!;
+        } else if (demoMode) {
+          const monthItems = await fetchDemoUsageItems(point.year, point.month);
+          const filtered = monthItems.filter((item) =>
+            usageMatchesFilters(item, selectedFilters) &&
+            (!demoDimensionFilters || matchesDemoDimensions(item, demoDimensionFilters))
+          );
+          const b = emptyBucket();
+          for (const item of filtered) addToBucket(b, item);
+          bucket = b;
         } else {
           try {
-            const monthItems = await fetchUsageItems(token, enterpriseSlug, point.year, point.month);
+            const monthItems = await fetchUsageItems(token!, enterpriseSlug!, point.year, point.month);
             const filtered = monthItems.filter((item) => usageMatchesFilters(item, selectedFilters));
             const b = emptyBucket();
             for (const item of filtered) addToBucket(b, item);

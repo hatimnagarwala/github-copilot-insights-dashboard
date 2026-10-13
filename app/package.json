@@ -16,7 +16,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "ingest": "tsx src/lib/etl/ingest.ts"
+    "ingest": "tsx src/lib/etl/ingest.ts",
+    "demo:generate": "tsx scripts/generate-demo-data.ts"
   },
   "dependencies": {
     "@github/copilot-sdk": "^1.0.5",

@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 
 import { NextResponse } from "next/server";
 import { desc, sql } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import {
   dimOrgMember,
   factCopilotSeatAssignment,

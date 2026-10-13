@@ -1,4 +1,4 @@
-import { db } from "./index";
+import { liveDb as db } from "./index";
 import { appSettings } from "./schema";
 import { eq } from "drizzle-orm";
 

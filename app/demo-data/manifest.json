@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "anchorDate": "2026-10-12",
+  "seed": 20261012,
+  "enterprise": {
+    "id": 999001,
+    "slug": "demo-enterprise"
+  },
+  "users": 50,
+  "days": 180,
+  "files": {
+    "users.json": "Array<{userId,login,displayName,orgLogin,teams:string[],persona,licenseAssignedDate}>; synthetic GitHub IDs, team slugs. Dates relative to manifest.anchorDate.",
+    "orgs.json": "Array<{githubOrgId,login}>",
+    "enterprise-teams.json": "Array<{githubTeamId,name,slug,description,members:number[]}>; members are users.json userId values.",
+    "usage.ndjson.gz": "gzip UTF-8 NDJSON of CopilotUsageRecord (snake_case API fields), with _orgLogin and _teamGithubId ingestion metadata; only active user-days. All feature/IDE/language/model/CLI/version/LOC/credit/phase fields populated.",
+    "org-aggregates.json.gz": "Gzipped Array<CopilotAggregateRecord>; flat API day records with _scope enterprise|organization and _orgLogin for organizations; rolling 7/28-day unique active users, activity totals, CLI totals, pull_requests, totals_by_ai_adoption_phase, and pull_requests.copilot_suggestions_by_comment_type.",
+    "seats.json": "Array<CopilotSeat> in billing/seats API shape: {created_at,updated_at,pending_cancellation_date,last_activity_at,last_authenticated_at,last_activity_editor,plan_type,assignee:{id,login},assigning_team:{id,name,slug}|null,organization?:{id,login}}. Snapshot date is manifest.anchorDate; no wrapper.",
+    "ai-credit-usage.json.gz": "Gzipped Array<fact_ai_credit_usage insert rows using camelCase Drizzle columns>: {enterpriseSlug,periodYear,periodMonth,usageDate,product,sku,model,costCenter,orgName,userLogin,teamName,unitType,pricePerUnit,grossQuantity,discountQuantity,netQuantity,grossAmount,discountAmount,netAmount}. Numeric columns are JSON numbers; stringify when inserting Drizzle numeric columns. No database-generated id/capturedAt. Daily rows by user/model/org/team across seven periods.",
+    "premium-requests.json.gz": "Gzipped {anchorDate,periods:Array<{year,month,usageItems:Array<{date,organizationName,repositoryName,user,team,sku,unitType,grossQuantity,grossAmount,discountAmount,netQuantity,netAmount}>}>}; each period is a raw GitHub BillingUsageResponse plus year/month selectors. Model identifier is sku. Dates span the complete usage period."
+  },
+  "notes": [
+    "All people, organizations, teams, IDs, repositories, workloads and amounts are synthetic. Never use these fixtures as billing estimates.",
+    "Arrays intentionally follow the agreed loader contract without envelopes; their date anchor is manifest.anchorDate. premium-requests includes its own anchorDate.",
+    "Shift ISO dates/timestamps by today minus anchorDate; derive billing periodYear/periodMonth and premium year/month from the shifted usage dates, regrouping rows if month boundaries change.",
+    "Dormant users have seats but no usage records; churned users stop after day 105, and several users onboard on days 45/90. Zero-activity days are omitted because reports count fact rows as active users.",
+    "PR counts are derived synthetic outcomes; median merge times are illustrative. Aggregate averages use the same daily cohort members and counts, with rounding to two decimals.",
+    "Billing discounts are capped per user/month at synthetic plan entitlements ($19/$39 base, $30/$70 promotional June-August); premium discounts are capped at 300/1000 requests. Both included and additional usage are populated.",
+    "Credit quantities match the per-user ai_credits_used signal for this synthetic dataset only; billing and consumption are distinct in real GitHub data.",
+    "Premium fixtures include April–October 2026 for demo replay, despite the live premium API cutoff of May 2026. Demo routes must choose fixture periods rather than apply the live cutoff."
+  ]
+}
