@@ -1,4 +1,6 @@
 import { getGitHubConfig } from "@/lib/db/settings";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoUsers } from "@/lib/demo/fixtures";
 
 const GITHUB_API_BASE = "https://api.github.com";
 const GITHUB_GRAPHQL = "https://api.github.com/graphql";
@@ -118,6 +120,16 @@ export async function resolveDisplayNames(
   const unique = [...new Set(logins.filter(Boolean))];
   const displayNameMap = new Map<string, string>();
   if (unique.length === 0) return displayNameMap;
+  if (await isDemoMode()) {
+    const users = await getDemoUsers();
+    const byLogin = new Map(users.map((user) => [user.login.toLowerCase(), user.displayName]));
+    const byId = new Map(users.map((user) => [String(user.userId), user.displayName]));
+    for (const login of unique) {
+      const name = byLogin.get(login.toLowerCase()) ?? byId.get(login);
+      if (name) displayNameMap.set(login, name);
+    }
+    return displayNameMap;
+  }
 
   for (let i = 0; i < unique.length; i += GRAPHQL_BATCH_SIZE) {
     const batch = unique.slice(i, i + GRAPHQL_BATCH_SIZE);
@@ -171,6 +183,14 @@ export async function resolveUserNames(
   let map = new Map<string, string>();
 
   if (unique.length > 0) {
+    if (await isDemoMode()) {
+      map = await resolveDisplayNames(unique, "");
+      return {
+        name: (login) => map.get(login) ?? null,
+        label: (login) => formatUserLabel(login, map),
+        map,
+      };
+    }
     let resolvedToken = token;
     if (resolvedToken === undefined) {
       try {

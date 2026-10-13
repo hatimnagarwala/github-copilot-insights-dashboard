@@ -2,7 +2,7 @@ export const runtime = "nodejs";
 
 import { NextRequest, NextResponse } from "next/server";
 import { sql } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { aiInsights } from "@/lib/db/schema";
 import { logAudit, getClientIp } from "@/lib/audit";
 import { safeErrorMessage } from "@/lib/auth";

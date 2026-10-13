@@ -11,6 +11,7 @@ pnpm run dev              # Development server (port 3000)
 pnpm run build            # Production build (validates types + lint)
 pnpm run test             # Run unit tests (vitest)
 pnpm run test:watch       # Run tests in watch mode
+pnpm run demo:generate    # Regenerate deterministic demo data fixtures
 pnpm run db:generate      # Generate Drizzle migrations after schema changes
 pnpm run db:migrate       # Run pending migrations
 ```
@@ -42,7 +43,9 @@ app/                      # Next.js 16 application
       i18n/               # Internationalization: LocaleProvider, translations (en/ar/es/fr)
       theme/              # Dark/light/system theme: ThemeProvider, chart-theme
       utils/              # Model display names and helpers
+      demo/               # Data mode, demo schema, fixtures loader and generator
     types/                # TypeScript type definitions
+  demo-data/              # Deterministic synthetic data fixtures
   drizzle/                # Generated SQL migration files
   public/                 # Static assets (favicon.ico, copilot-icon.svg)
 infra/                    # Azure Bicep infrastructure-as-code
@@ -148,7 +151,7 @@ console.error("Failed to fetch data:", error);
 ## Docker
 
 Next.js standalone output mode — the Dockerfile runner stage must explicitly copy:
-- `.next/standalone`, `.next/static`, `public/`, `drizzle/`
+- `.next/standalone`, `.next/static`, `public/`, `drizzle/`, and `demo-data/`
 
 ## Security
 

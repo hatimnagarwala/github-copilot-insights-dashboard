@@ -1,28 +1,16 @@
-import { drizzle } from "drizzle-orm/postgres-js";
-import postgres from "postgres";
+import { getDataModeSync } from "@/lib/demo/data-mode";
+import { demoDb, liveDb } from "./clients";
+import type { Database } from "./clients";
 
-let _db: ReturnType<typeof drizzle> | null = null;
+export { demoDb, liveDb } from "./clients";
+export type { Database } from "./clients";
 
-function getDb() {
-  if (!_db) {
-    const connectionString = process.env.DATABASE_URL;
-    if (!connectionString) {
-      throw new Error("DATABASE_URL environment variable is not set");
-    }
-    const client = postgres(connectionString, {
-      max: 10,
-      idle_timeout: 20,
-      connect_timeout: 10,
-    });
-    _db = drizzle({ client, logger: process.env.NODE_ENV === "development" });
-  }
-  return _db;
-}
-
-export const db = new Proxy({} as ReturnType<typeof drizzle>, {
+/** Report queries follow the cached mode; operational code must use liveDb. */
+export const db: Database = new Proxy({} as Database, {
   get(_target, prop) {
-    return (getDb() as unknown as Record<string | symbol, unknown>)[prop];
+    const target = getDataModeSync() === "demo" ? demoDb : liveDb;
+    const value = Reflect.get(target, prop, target);
+    // postgres-js is callable but its attached reserve/end methods must survive.
+    return typeof value === "function" && prop !== "$client" ? value.bind(target) : value;
   },
 });
-
-export type Database = ReturnType<typeof drizzle>;

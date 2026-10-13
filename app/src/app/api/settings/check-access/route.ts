@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { githubAccessCheckSnapshot } from "@/lib/db/schema";
 import { getGitHubConfig } from "@/lib/db/settings";
 import { checkGitHubAccess } from "@/lib/github/access-check";

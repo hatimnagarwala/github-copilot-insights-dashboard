@@ -18,7 +18,7 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import { sql as dsql } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { liveDb as db } from "@/lib/db";
 import { buildMigrationEntries, computeMigrationHash } from "@/lib/db/migration-status";
 import { getSchemaColumns, getSchemaTables } from "@/lib/db/schema-introspect";
 

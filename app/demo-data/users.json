@@ -1,0 +1,552 @@
+[
+  {
+    "userId": 90000001,
+    "login": "demo-alice-chen",
+    "displayName": "Alice Chen",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-17"
+  },
+  {
+    "userId": 90000002,
+    "login": "demo-ben-patel",
+    "displayName": "Ben Patel",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-03-16"
+  },
+  {
+    "userId": 90000003,
+    "login": "demo-carla-rivera",
+    "displayName": "Carla Rivera",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-03-15"
+  },
+  {
+    "userId": 90000004,
+    "login": "demo-daniel-okafor",
+    "displayName": "Daniel Okafor",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-14"
+  },
+  {
+    "userId": 90000005,
+    "login": "demo-elena-rossi",
+    "displayName": "Elena Rossi",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-03-13"
+  },
+  {
+    "userId": 90000006,
+    "login": "demo-farah-ahmed",
+    "displayName": "Farah Ahmed",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-03-12"
+  },
+  {
+    "userId": 90000007,
+    "login": "demo-george-kim",
+    "displayName": "George Kim",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-11"
+  },
+  {
+    "userId": 90000008,
+    "login": "demo-hana-suzuki",
+    "displayName": "Hana Suzuki",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-03-10"
+  },
+  {
+    "userId": 90000009,
+    "login": "demo-isaac-brown",
+    "displayName": "Isaac Brown",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-03-09"
+  },
+  {
+    "userId": 90000010,
+    "login": "demo-julia-martin",
+    "displayName": "Julia Martin",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-08"
+  },
+  {
+    "userId": 90000011,
+    "login": "demo-kai-nguyen",
+    "displayName": "Kai Nguyen",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-03-07"
+  },
+  {
+    "userId": 90000012,
+    "login": "demo-lena-fischer",
+    "displayName": "Lena Fischer",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-03-06"
+  },
+  {
+    "userId": 90000013,
+    "login": "demo-marco-silva",
+    "displayName": "Marco Silva",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-05"
+  },
+  {
+    "userId": 90000014,
+    "login": "demo-nadia-ali",
+    "displayName": "Nadia Ali",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-03-04"
+  },
+  {
+    "userId": 90000015,
+    "login": "demo-owen-clarke",
+    "displayName": "Owen Clarke",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-03-03"
+  },
+  {
+    "userId": 90000016,
+    "login": "demo-priya-shah",
+    "displayName": "Priya Shah",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-03-02"
+  },
+  {
+    "userId": 90000017,
+    "login": "demo-quinn-murphy",
+    "displayName": "Quinn Murphy",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-03-01"
+  },
+  {
+    "userId": 90000018,
+    "login": "demo-rosa-garcia",
+    "displayName": "Rosa Garcia",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "occasional",
+    "licenseAssignedDate": "2026-02-28"
+  },
+  {
+    "userId": 90000019,
+    "login": "demo-sam-wilson",
+    "displayName": "Sam Wilson",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-27"
+  },
+  {
+    "userId": 90000020,
+    "login": "demo-tara-singh",
+    "displayName": "Tara Singh",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-26"
+  },
+  {
+    "userId": 90000021,
+    "login": "demo-uma-das",
+    "displayName": "Uma Das",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "occasional",
+    "licenseAssignedDate": "2026-02-25"
+  },
+  {
+    "userId": 90000022,
+    "login": "demo-victor-santos",
+    "displayName": "Victor Santos",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-24"
+  },
+  {
+    "userId": 90000023,
+    "login": "demo-wendy-liu",
+    "displayName": "Wendy Liu",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-23"
+  },
+  {
+    "userId": 90000024,
+    "login": "demo-xavier-dupont",
+    "displayName": "Xavier Dupont",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-design-systems"
+    ],
+    "persona": "occasional",
+    "licenseAssignedDate": "2026-02-22"
+  },
+  {
+    "userId": 90000025,
+    "login": "demo-yara-hassan",
+    "displayName": "Yara Hassan",
+    "orgLogin": "demo-contoso-web",
+    "teams": [
+      "demo-web-experience"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-21"
+  },
+  {
+    "userId": 90000026,
+    "login": "demo-zane-brooks",
+    "displayName": "Zane Brooks",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-20"
+  },
+  {
+    "userId": 90000027,
+    "login": "demo-amara-nwosu",
+    "displayName": "Amara Nwosu",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "occasional",
+    "licenseAssignedDate": "2026-02-19"
+  },
+  {
+    "userId": 90000028,
+    "login": "demo-bruno-costa",
+    "displayName": "Bruno Costa",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-18"
+  },
+  {
+    "userId": 90000029,
+    "login": "demo-chloe-laurent",
+    "displayName": "Chloe Laurent",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-17"
+  },
+  {
+    "userId": 90000030,
+    "login": "demo-diego-torres",
+    "displayName": "Diego Torres",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "occasional",
+    "licenseAssignedDate": "2026-02-16"
+  },
+  {
+    "userId": 90000031,
+    "login": "demo-emma-jensen",
+    "displayName": "Emma Jensen",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-15"
+  },
+  {
+    "userId": 90000032,
+    "login": "demo-felix-weber",
+    "displayName": "Felix Weber",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-14"
+  },
+  {
+    "userId": 90000033,
+    "login": "demo-grace-park",
+    "displayName": "Grace Park",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "dormant",
+    "licenseAssignedDate": "2026-02-13"
+  },
+  {
+    "userId": 90000034,
+    "login": "demo-hugo-moreau",
+    "displayName": "Hugo Moreau",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "power-agent",
+    "licenseAssignedDate": "2026-02-12"
+  },
+  {
+    "userId": 90000035,
+    "login": "demo-imani-james",
+    "displayName": "Imani James",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-11"
+  },
+  {
+    "userId": 90000036,
+    "login": "demo-jonah-reed",
+    "displayName": "Jonah Reed",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "dormant",
+    "licenseAssignedDate": "2026-02-10"
+  },
+  {
+    "userId": 90000037,
+    "login": "demo-keiko-tanaka",
+    "displayName": "Keiko Tanaka",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-02-09"
+  },
+  {
+    "userId": 90000038,
+    "login": "demo-lucas-meyer",
+    "displayName": "Lucas Meyer",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-02-08"
+  },
+  {
+    "userId": 90000039,
+    "login": "demo-maya-kapoor",
+    "displayName": "Maya Kapoor",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-platform-engineering"
+    ],
+    "persona": "dormant",
+    "licenseAssignedDate": "2026-02-07"
+  },
+  {
+    "userId": 90000040,
+    "login": "demo-noah-evans",
+    "displayName": "Noah Evans",
+    "orgLogin": "demo-contoso-platform",
+    "teams": [
+      "demo-developer-productivity"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-02-06"
+  },
+  {
+    "userId": 90000041,
+    "login": "demo-olivia-wright",
+    "displayName": "Olivia Wright",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-07-15"
+  },
+  {
+    "userId": 90000042,
+    "login": "demo-pavel-novak",
+    "displayName": "Pavel Novak",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "churned",
+    "licenseAssignedDate": "2026-02-04"
+  },
+  {
+    "userId": 90000043,
+    "login": "demo-rina-sato",
+    "displayName": "Rina Sato",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-07-15"
+  },
+  {
+    "userId": 90000044,
+    "login": "demo-sofia-mendes",
+    "displayName": "Sofia Mendes",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "completions-only",
+    "licenseAssignedDate": "2026-05-31"
+  },
+  {
+    "userId": 90000045,
+    "login": "demo-theo-anders",
+    "displayName": "Theo Anders",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "churned",
+    "licenseAssignedDate": "2026-02-01"
+  },
+  {
+    "userId": 90000046,
+    "login": "demo-aisha-khan",
+    "displayName": "Aisha Khan",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-05-31"
+  },
+  {
+    "userId": 90000047,
+    "login": "demo-boris-ivanov",
+    "displayName": "Boris Ivanov",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-07-15"
+  },
+  {
+    "userId": 90000048,
+    "login": "demo-celia-ruiz",
+    "displayName": "Celia Ruiz",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "churned",
+    "licenseAssignedDate": "2026-01-29"
+  },
+  {
+    "userId": 90000049,
+    "login": "demo-darius-bell",
+    "displayName": "Darius Bell",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "chat-heavy",
+    "licenseAssignedDate": "2026-07-15"
+  },
+  {
+    "userId": 90000050,
+    "login": "demo-eva-nielsen",
+    "displayName": "Eva Nielsen",
+    "orgLogin": "demo-contoso-data",
+    "teams": [
+      "demo-data-intelligence"
+    ],
+    "persona": "cli",
+    "licenseAssignedDate": "2026-05-31"
+  }
+]

@@ -16,6 +16,21 @@ export async function register() {
       }
     }
 
+    if (!result.migrationError && !result.fixupError) {
+      try {
+        const { ensureDemoDataLoaded } = await import("@/lib/demo/loader");
+        await ensureDemoDataLoaded();
+      } catch (error) {
+        console.error("Failed to initialize demo data:", error);
+      }
+    }
+    try {
+      const { refreshDataMode } = await import("@/lib/demo/data-mode");
+      await refreshDataMode();
+    } catch (error) {
+      console.error("Failed to warm data mode cache:", error);
+    }
+
     // Initialize ETL sync scheduler using saved settings
     const { getSetting } = await import("@/lib/db/settings");
     const { startScheduler } = await import("@/lib/etl/scheduler");

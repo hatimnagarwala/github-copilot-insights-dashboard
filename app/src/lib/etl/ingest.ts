@@ -6,7 +6,11 @@
  * 2. Load from uploaded NDJSON file (official metrics export)
  */
 
-import { db } from "@/lib/db";
+import { liveDb as db, liveDb } from "@/lib/db";
+import type { Database } from "@/lib/db";
+
+/** A pinned database client or an existing transaction (including demo loads). */
+export type EtlDatabase = Database | Parameters<Parameters<Database["transaction"]>[0]>[0];
 import {
   rawCopilotUsage,
   factCopilotUsageDaily,
@@ -106,10 +110,12 @@ interface FileIngestOptions {
 /**
  * Upsert dimension values and return a lookup map of name → id.
  */
-async function ensureDimensions(
+export async function ensureDimensions(
   records: CopilotUsageRecord[],
-  discoveredOrgs?: EnterpriseOrg[]
+  discoveredOrgs?: EnterpriseOrg[],
+  database: EtlDatabase = liveDb,
 ) {
+  const db = database;
   // Organizations — from discovered orgs + any org IDs in records
   if (discoveredOrgs?.length) {
     // Batch upsert discovered orgs
@@ -198,11 +204,13 @@ async function ensureDimensions(
 /**
  * Ensure user dimension entries exist.
  */
-async function ensureUsers(
-  records: CopilotUsageRecord[],
+export async function ensureUsers(
+  records: Pick<CopilotUsageRecord, "user_id" | "user_login" | "organization_id" | "_orgLogin">[],
   orgMap: Map<string, number>,
-  orgIdToKeyMap: Map<string, number>
+  orgIdToKeyMap: Map<string, number>,
+  database: EtlDatabase = liveDb,
 ) {
+  const db = database;
   const seen = new Set<number>();
   for (const r of records) {
     if (seen.has(r.user_id)) continue;
@@ -254,7 +262,9 @@ export async function persistOrgAggregates(
   aggregateRecords: CopilotAggregateRecord[],
   orgMap: Map<string, number>,
   log: (msg: string) => void = () => {},
+  database: EtlDatabase = liveDb,
 ): Promise<number> {
+  const db = database;
   let aggregateInserted = 0;
   for (const aggRecord of aggregateRecords) {
     const row = transformToFactOrgAggregate(aggRecord);

@@ -1,0 +1,1034 @@
+[
+  {
+    "created_at": "2026-03-17T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000001,
+      "login": "demo-alice-chen"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-16T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000002,
+      "login": "demo-ben-patel"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000003,
+      "login": "demo-carla-rivera"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-14T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000004,
+      "login": "demo-daniel-okafor"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-13T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-09T16:30:00Z",
+    "last_authenticated_at": "2026-10-09T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000005,
+      "login": "demo-elena-rossi"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-12T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-09T16:30:00Z",
+    "last_authenticated_at": "2026-10-09T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000006,
+      "login": "demo-farah-ahmed"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-11T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-09T16:30:00Z",
+    "last_authenticated_at": "2026-10-09T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000007,
+      "login": "demo-george-kim"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-10T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000008,
+      "login": "demo-hana-suzuki"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-09T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-09T16:30:00Z",
+    "last_authenticated_at": "2026-10-09T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000009,
+      "login": "demo-isaac-brown"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-08T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000010,
+      "login": "demo-julia-martin"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-07T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000011,
+      "login": "demo-kai-nguyen"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-06T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000012,
+      "login": "demo-lena-fischer"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-05T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000013,
+      "login": "demo-marco-silva"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-04T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000014,
+      "login": "demo-nadia-ali"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-03T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000015,
+      "login": "demo-owen-clarke"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-02T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000016,
+      "login": "demo-priya-shah"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-03-01T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000017,
+      "login": "demo-quinn-murphy"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-28T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-09-30T16:30:00Z",
+    "last_authenticated_at": "2026-09-30T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000018,
+      "login": "demo-rosa-garcia"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-27T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000019,
+      "login": "demo-sam-wilson"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-26T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000020,
+      "login": "demo-tara-singh"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-25T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-05T16:30:00Z",
+    "last_authenticated_at": "2026-10-05T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000021,
+      "login": "demo-uma-das"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-24T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-10T16:30:00Z",
+    "last_authenticated_at": "2026-10-10T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000022,
+      "login": "demo-victor-santos"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-23T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-11T16:30:00Z",
+    "last_authenticated_at": "2026-10-11T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000023,
+      "login": "demo-wendy-liu"
+    },
+    "assigning_team": {
+      "id": 999201,
+      "name": "Demo Web Experience",
+      "slug": "demo-web-experience"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-22T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-11T16:30:00Z",
+    "last_authenticated_at": "2026-10-11T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000024,
+      "login": "demo-xavier-dupont"
+    },
+    "assigning_team": {
+      "id": 999202,
+      "name": "Demo Design Systems",
+      "slug": "demo-design-systems"
+    },
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-21T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000025,
+      "login": "demo-yara-hassan"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999101,
+      "login": "demo-contoso-web"
+    }
+  },
+  {
+    "created_at": "2026-02-20T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-11T16:30:00Z",
+    "last_authenticated_at": "2026-10-11T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000026,
+      "login": "demo-zane-brooks"
+    },
+    "assigning_team": {
+      "id": 999204,
+      "name": "Demo Developer Productivity",
+      "slug": "demo-developer-productivity"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-19T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-09-17T16:30:00Z",
+    "last_authenticated_at": "2026-09-17T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000027,
+      "login": "demo-amara-nwosu"
+    },
+    "assigning_team": {
+      "id": 999203,
+      "name": "Demo Platform Engineering",
+      "slug": "demo-platform-engineering"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-18T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000028,
+      "login": "demo-bruno-costa"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-17T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000029,
+      "login": "demo-chloe-laurent"
+    },
+    "assigning_team": {
+      "id": 999203,
+      "name": "Demo Platform Engineering",
+      "slug": "demo-platform-engineering"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-16T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000030,
+      "login": "demo-diego-torres"
+    },
+    "assigning_team": {
+      "id": 999204,
+      "name": "Demo Developer Productivity",
+      "slug": "demo-developer-productivity"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-11T16:30:00Z",
+    "last_authenticated_at": "2026-10-11T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000031,
+      "login": "demo-emma-jensen"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-14T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000032,
+      "login": "demo-felix-weber"
+    },
+    "assigning_team": {
+      "id": 999204,
+      "name": "Demo Developer Productivity",
+      "slug": "demo-developer-productivity"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-13T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": null,
+    "last_authenticated_at": null,
+    "last_activity_editor": null,
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000033,
+      "login": "demo-grace-park"
+    },
+    "assigning_team": {
+      "id": 999203,
+      "name": "Demo Platform Engineering",
+      "slug": "demo-platform-engineering"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-12T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000034,
+      "login": "demo-hugo-moreau"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-11T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000035,
+      "login": "demo-imani-james"
+    },
+    "assigning_team": {
+      "id": 999203,
+      "name": "Demo Platform Engineering",
+      "slug": "demo-platform-engineering"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-10T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": null,
+    "last_authenticated_at": null,
+    "last_activity_editor": null,
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000036,
+      "login": "demo-jonah-reed"
+    },
+    "assigning_team": {
+      "id": 999204,
+      "name": "Demo Developer Productivity",
+      "slug": "demo-developer-productivity"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-09T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000037,
+      "login": "demo-keiko-tanaka"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-08T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000038,
+      "login": "demo-lucas-meyer"
+    },
+    "assigning_team": {
+      "id": 999204,
+      "name": "Demo Developer Productivity",
+      "slug": "demo-developer-productivity"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-07T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": null,
+    "last_authenticated_at": null,
+    "last_activity_editor": null,
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000039,
+      "login": "demo-maya-kapoor"
+    },
+    "assigning_team": {
+      "id": 999203,
+      "name": "Demo Platform Engineering",
+      "slug": "demo-platform-engineering"
+    },
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-02-06T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000040,
+      "login": "demo-noah-evans"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999102,
+      "login": "demo-contoso-platform"
+    }
+  },
+  {
+    "created_at": "2026-07-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-10T16:30:00Z",
+    "last_authenticated_at": "2026-10-10T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000041,
+      "login": "demo-olivia-wright"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-02-04T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": "2026-10-26",
+    "last_activity_at": "2026-07-29T16:30:00Z",
+    "last_authenticated_at": "2026-07-29T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000042,
+      "login": "demo-pavel-novak"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-07-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000043,
+      "login": "demo-rina-sato"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-05-31T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000044,
+      "login": "demo-sofia-mendes"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-02-01T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": "2026-10-26",
+    "last_activity_at": "2026-07-27T16:30:00Z",
+    "last_authenticated_at": "2026-07-27T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000045,
+      "login": "demo-theo-anders"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-05-31T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "vscode",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000046,
+      "login": "demo-aisha-khan"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-07-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "jetbrains",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000047,
+      "login": "demo-boris-ivanov"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-01-29T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": "2026-10-26",
+    "last_activity_at": "2026-07-30T16:30:00Z",
+    "last_authenticated_at": "2026-07-30T16:30:00Z",
+    "last_activity_editor": "visualstudio",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000048,
+      "login": "demo-celia-ruiz"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-07-15T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "neovim",
+    "plan_type": "business",
+    "assignee": {
+      "id": 90000049,
+      "login": "demo-darius-bell"
+    },
+    "assigning_team": null,
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  },
+  {
+    "created_at": "2026-05-31T16:30:00Z",
+    "updated_at": "2026-10-12T16:30:00Z",
+    "pending_cancellation_date": null,
+    "last_activity_at": "2026-10-12T16:30:00Z",
+    "last_authenticated_at": "2026-10-12T16:30:00Z",
+    "last_activity_editor": "xcode",
+    "plan_type": "enterprise",
+    "assignee": {
+      "id": 90000050,
+      "login": "demo-eva-nielsen"
+    },
+    "assigning_team": {
+      "id": 999205,
+      "name": "Demo Data Intelligence",
+      "slug": "demo-data-intelligence"
+    },
+    "organization": {
+      "id": 999103,
+      "login": "demo-contoso-data"
+    }
+  }
+]

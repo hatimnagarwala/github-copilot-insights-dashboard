@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getGitHubConfig } from "@/lib/db/settings";
 import { resolveUserNames } from "@/lib/github/resolve-display-names";
 import { persistCopilotSeatAssignments } from "@/lib/etl/enterprise-context";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoSeats } from "@/lib/demo/fixtures";
 
 const GITHUB_API_BASE = "https://api.github.com";
 const API_VERSION = "2026-03-10";
@@ -50,63 +52,69 @@ const INACTIVE_THRESHOLD_DAYS = 30;
 
 export async function GET() {
   try {
-    const { token, enterpriseSlug } = await getGitHubConfig();
+    const demoMode = await isDemoMode();
+    const { token, enterpriseSlug } = demoMode
+      ? { token: null, enterpriseSlug: null }
+      : await getGitHubConfig();
 
-    if (!token || !enterpriseSlug) {
+    if (!demoMode && (!token || !enterpriseSlug)) {
       return NextResponse.json(
         { error: "GitHub token and enterprise slug must be configured in Settings." },
         { status: 400 }
       );
     }
 
-    const allSeats: CopilotSeat[] = [];
-    let page = 1;
-    let totalSeats = 0;
+    let allSeats: CopilotSeat[];
+    if (demoMode) {
+      allSeats = await getDemoSeats();
+    } else {
+      allSeats = [];
+      let page = 1;
+      let totalSeats = 0;
 
-    // Paginate through all seats
-    while (true) {
-      const url = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug)}/copilot/billing/seats?per_page=100&page=${page}`;
-      const response = await fetch(url, {
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: `Bearer ${token}`,
-          "X-GitHub-Api-Version": API_VERSION,
-        },
-        next: { revalidate: 0 },
-      });
+      // Paginate through all seats
+      while (true) {
+        const url = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug!)}/copilot/billing/seats?per_page=100&page=${page}`;
+        const response = await fetch(url, {
+          headers: {
+            Accept: "application/vnd.github+json",
+            Authorization: `Bearer ${token}`,
+            "X-GitHub-Api-Version": API_VERSION,
+          },
+          next: { revalidate: 0 },
+        });
 
-      if (!response.ok) {
-        const text = await response.text();
-        console.error(`GitHub API error: ${response.status} ${response.statusText}`, text);
-        if (response.status === 403) {
+        if (!response.ok) {
+          const text = await response.text();
+          console.error(`GitHub API error: ${response.status} ${response.statusText}`, text);
+          if (response.status === 403) {
+            return NextResponse.json(
+              { error: "Access denied. Your PAT may not have the required scopes. Please ensure it has: manage_billing:copilot (read) or manage_billing:enterprise (read). Update scopes at https://github.com/settings/tokens" },
+              { status: 403 }
+            );
+          }
+          if (response.status === 404) {
+            return NextResponse.json(
+              { error: "Enterprise not found. Please verify the enterprise slug in Settings and ensure your PAT has access to this enterprise." },
+              { status: 404 }
+            );
+          }
           return NextResponse.json(
-            { error: "Access denied. Your PAT may not have the required scopes. Please ensure it has: manage_billing:copilot (read) or manage_billing:enterprise (read). Update scopes at https://github.com/settings/tokens" },
-            { status: 403 }
+            { error: `GitHub API error: ${response.status} ${response.statusText}` },
+            { status: response.status }
           );
         }
-        if (response.status === 404) {
-          return NextResponse.json(
-            { error: "Enterprise not found. Please verify the enterprise slug in Settings and ensure your PAT has access to this enterprise." },
-            { status: 404 }
-          );
-        }
-        return NextResponse.json(
-          { error: `GitHub API error: ${response.status} ${response.statusText}` },
-          { status: response.status }
-        );
+
+        const data: SeatsResponse = await response.json();
+        totalSeats = data.total_seats;
+        allSeats.push(...data.seats);
+
+        if (allSeats.length >= totalSeats || data.seats.length < 100) break;
+        page++;
       }
 
-      const data: SeatsResponse = await response.json();
-      totalSeats = data.total_seats;
-      allSeats.push(...data.seats);
-
-      if (allSeats.length >= totalSeats || data.seats.length < 100) {
-        break;
-      }
-      page++;
+      await persistCopilotSeatAssignments({ enterpriseSlug: enterpriseSlug!, seats: allSeats });
     }
-
-    await persistCopilotSeatAssignments({ enterpriseSlug, seats: allSeats });
 
     // Fetch user display names concurrently (best-effort)
     const uniqueLogins = [...new Set(allSeats.map((s) => s.assignee?.login).filter(Boolean))];

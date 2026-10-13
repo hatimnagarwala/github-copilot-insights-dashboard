@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import { AgentIcon } from "@/components/icons/agent-icon";
 import { CliIcon } from "@/components/icons/cli-icon";
+import { DataModeToggle } from "@/components/layout/data-mode-toggle";
 
 // Reports are ordered from highest impact (top) to lowest. The deprecated
 // Premium Requests report sits at the bottom, followed by a separator and the
@@ -92,6 +93,9 @@ export function Sidebar() {
           {t("common.copilotInsights")}
         </span>
       </Link>
+      <div className="border-b border-gray-200 px-3 py-2 dark:border-gray-700">
+        <DataModeToggle />
+      </div>
       <nav className="flex-1 overflow-y-auto px-2 py-3">
         <ul ref={navRef} className="space-y-0.5">
           {NAV_KEYS.map((item) => {

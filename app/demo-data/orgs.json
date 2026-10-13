@@ -1,0 +1,14 @@
+[
+  {
+    "githubOrgId": 999101,
+    "login": "demo-contoso-web"
+  },
+  {
+    "githubOrgId": 999102,
+    "login": "demo-contoso-platform"
+  },
+  {
+    "githubOrgId": 999103,
+    "login": "demo-contoso-data"
+  }
+]

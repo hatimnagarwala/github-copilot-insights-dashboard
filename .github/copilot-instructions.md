@@ -12,12 +12,13 @@ See [docs/architecture.md](../docs/architecture.md) for system diagrams, data fl
 
 - **Star schema** database: dimension tables (`dim_*`) + fact tables (`fact_*`) optimized for analytics
 - **ETL pipeline**: `lib/github/copilot-api.ts` → `lib/etl/ingest.ts` → `lib/etl/transform.ts` → PostgreSQL
+- **Demo Data Mode**: global admin-only `live`/`demo` selection with isolated demo-schema fixtures; see `docs/architecture.md`
 - **GitHub API version**: `2026-03-10` (all endpoints — Copilot Usage Metrics, org listing, members)
 - **Theme system**: light/dark/system via `ThemeProvider` + Tailwind `class` strategy
 - **Internationalization**: 4 languages (en/ar/es/fr) via `LocaleProvider` + `useTranslation()` hook
 - **Server Components** by default; `"use client"` only when state/effects are needed
 - **API routes** under `app/src/app/api/` with Zod validation on all query params
-- **Standalone output** mode for Docker — `public/` and `drizzle/` must be explicitly copied in Dockerfile
+- **Standalone output** mode for Docker — `public/`, `drizzle/`, and `demo-data/` must be explicitly copied in Dockerfile
 
 ## Code Style
 

@@ -25,6 +25,7 @@ function getAppVersion(): string {
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  outputFileTracingIncludes: { "/*": ["./demo-data/**/*"] },
   // The Copilot SDK spawns the bundled Copilot CLI as a child process at runtime;
   // keep it external so Next does not try to bundle the native binary.
   serverExternalPackages: ["@github/copilot-sdk"],

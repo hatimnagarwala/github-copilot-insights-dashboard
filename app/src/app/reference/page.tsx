@@ -1559,7 +1559,7 @@ export default function MetricsInfoPage() {
       <div>
         <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Data Model</h2>
         <p className="text-sm text-gray-500 mb-4 dark:text-gray-400">
-          Star schema ingested from the GitHub Copilot Usage Metrics API (version 2026-03-10)
+          Star schema ingested from the GitHub Copilot Usage Metrics API (version 2026-03-10). Demo mode reads cloned tables in the isolated PostgreSQL `demo` schema.
         </p>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {DATA_MODEL.map((t) => (
@@ -1607,6 +1607,9 @@ export default function MetricsInfoPage() {
                 { ep: "GET /api/users", desc: "User directory with activity stats merged with live license data", params: "days, start, end, search, orgId, segment, limit, offset, sortBy, sortDir" },
                 { ep: "GET /api/data-range", desc: "Synced data date range, row counts, and last sync metadata", params: "—" },
                 { ep: "GET /api/settings", desc: "Application settings (GitHub token, enterprise slug, sync config)", params: "—" },
+                { ep: "GET /api/data-mode", desc: "Active global data mode and demo dataset summary", params: "—" },
+                { ep: "POST /api/settings/data-mode", desc: "Admin-only switch between live and demo data", params: "mode: live | demo (JSON body)" },
+                { ep: "POST /api/settings/demo-data/reload", desc: "Admin-only demo fixture reload with server-sent progress", params: "—" },
                 { ep: "PUT /api/settings", desc: "Update application settings", params: "JSON body" },
                 { ep: "GET /api/settings/orgs", desc: "Discovered GitHub organizations for configuration and reporting", params: "—" },
                 { ep: "GET /api/settings/sync-history", desc: "Ingestion history log with pagination", params: "limit, offset" },

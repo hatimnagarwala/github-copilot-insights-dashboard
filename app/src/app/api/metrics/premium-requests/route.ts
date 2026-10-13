@@ -4,6 +4,8 @@ import { getGitHubConfig } from "@/lib/db/settings";
 import { resolveUserNames } from "@/lib/github/resolve-display-names";
 import { getModelDisplayName } from "@/lib/utils/model-display-names";
 import { safeErrorMessage } from "@/lib/auth";
+import { isDemoMode } from "@/lib/demo/data-mode";
+import { getDemoPremiumPeriods, getDemoSeats } from "@/lib/demo/fixtures";
 
 export const dynamic = "force-dynamic";
 
@@ -132,9 +134,12 @@ function usageMatchesFilters(
 
 export async function GET(request: NextRequest) {
   try {
-    const { token, enterpriseSlug } = await getGitHubConfig();
+    const demoMode = await isDemoMode();
+    const config = demoMode ? null : await getGitHubConfig();
+    const token = config?.token ?? null;
+    const enterpriseSlug = config?.enterpriseSlug ?? null;
 
-    if (!token || !enterpriseSlug) {
+    if (!demoMode && (!token || !enterpriseSlug)) {
       return NextResponse.json(
         { error: "GitHub token and enterprise slug must be configured in Settings." },
         { status: 400 }
@@ -152,11 +157,14 @@ export async function GET(request: NextRequest) {
       team: sp.get("team") ?? undefined,
     });
 
-    const defaultPeriod = clampPremiumRequestsPeriod(now.getFullYear(), now.getMonth() + 1);
+    const demoPeriods = demoMode ? await getDemoPremiumPeriods() : null;
+    const defaultPeriod = demoMode && demoPeriods?.length
+      ? demoPeriods[demoPeriods.length - 1]
+      : clampPremiumRequestsPeriod(now.getFullYear(), now.getMonth() + 1);
     const year = parsed.year ?? defaultPeriod.year;
     const month = parsed.month ?? defaultPeriod.month;
 
-    if (isAfterPremiumRequestsCutoff(year, month)) {
+    if (!demoMode && isAfterPremiumRequestsCutoff(year, month)) {
       return NextResponse.json(
         { error: "Premium Requests data is only available through May 2026. Use the AI Credits report for June 2026 and later." },
         { status: 400 },
@@ -173,7 +181,9 @@ export async function GET(request: NextRequest) {
     // 1. Fetch current-month usage
     let usageItems: BillingUsageItem[] = [];
     try {
-      usageItems = await fetchUsageItems(token, enterpriseSlug, year, month);
+      usageItems = demoMode
+        ? (demoPeriods?.find((period) => period.year === year && period.month === month)?.usageItems ?? [])
+        : await fetchUsageItems(token!, enterpriseSlug!, year, month);
     } catch (err) {
       if (err instanceof GitHubHttpError) {
         console.error(`Premium billing API error: ${err.status}`, err.body);
@@ -198,25 +208,30 @@ export async function GET(request: NextRequest) {
     }
 
     // 2. Fetch seat data for plan quotas (deduplicated by user — highest plan wins)
-    const allSeats: SeatInfo[] = [];
-    let page = 1;
-    while (true) {
-      const seatsUrl = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug)}/copilot/billing/seats?per_page=100&page=${page}`;
-      const seatsRes = await fetch(seatsUrl, {
-        headers: {
-          Accept: "application/vnd.github+json",
-          Authorization: "Bearer " + token,
-          "X-GitHub-Api-Version": API_VERSION,
-        },
-        next: { revalidate: 0 },
-      });
+    let allSeats: SeatInfo[];
+    if (demoMode) {
+      allSeats = (await getDemoSeats()).map((seat) => ({ plan_type: seat.plan_type, assignee: seat.assignee }));
+    } else {
+      allSeats = [];
+      let page = 1;
+      while (true) {
+        const seatsUrl = `${GITHUB_API_BASE}/enterprises/${encodeURIComponent(enterpriseSlug!)}/copilot/billing/seats?per_page=100&page=${page}`;
+        const seatsRes = await fetch(seatsUrl, {
+          headers: {
+            Accept: "application/vnd.github+json",
+            Authorization: "Bearer " + token,
+            "X-GitHub-Api-Version": API_VERSION,
+          },
+          next: { revalidate: 0 },
+        });
 
-      if (!seatsRes.ok) break;
+        if (!seatsRes.ok) break;
 
-      const seatsData: SeatsResponse = await seatsRes.json();
-      allSeats.push(...seatsData.seats);
-      if (seatsData.seats.length < 100) break;
-      page++;
+        const seatsData: SeatsResponse = await seatsRes.json();
+        allSeats.push(...seatsData.seats);
+        if (seatsData.seats.length < 100) break;
+        page++;
+      }
     }
 
     // Deduplicate by user login — highest plan wins (enterprise > business)
@@ -339,15 +354,17 @@ export async function GET(request: NextRequest) {
 
     // 7. Build monthly trend (selected + previous 5 months) and period-over-period deltas.
     const monthPoints = Array.from({ length: 6 }, (_, idx) => shiftMonth(year, month, idx - 5))
-      .filter((point) => !isAfterPremiumRequestsCutoff(point.year, point.month));
+      .filter((point) => demoMode || !isAfterPremiumRequestsCutoff(point.year, point.month));
+    const demoPeriodMap = new Map((demoPeriods ?? []).map((period) => [`${period.year}-${period.month}`, period.usageItems]));
     const monthlyTrend = await Promise.all(
       monthPoints.map(async (point) => {
         let monthItems: BillingUsageItem[] = [];
         try {
-          monthItems =
-            point.year === year && point.month === month
+          monthItems = demoMode
+            ? (demoPeriodMap.get(`${point.year}-${point.month}`) ?? [])
+            : point.year === year && point.month === month
               ? usageItems
-              : await fetchUsageItems(token, enterpriseSlug, point.year, point.month);
+              : await fetchUsageItems(token!, enterpriseSlug!, point.year, point.month);
         } catch {
           monthItems = [];
         }
